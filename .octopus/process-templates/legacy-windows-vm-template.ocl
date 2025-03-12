@@ -5,11 +5,12 @@ parameter "PackageName" {
     display_settings = {
         Octopus.ControlType = "Package"
     }
+    help_text = ""
     label = "PackageName"
 }
 
 step "run-standard-script" {
-    name = "Run Standard Script"
+    name = "Run Legacy Script"
     properties = {
         Octopus.Action.TargetRoles = "web"
     }
