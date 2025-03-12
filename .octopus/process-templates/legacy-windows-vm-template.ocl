@@ -1,6 +1,13 @@
 name = "Legacy Windows VM Template"
 description = ""
 
+parameter "PackageName" {
+    display_settings = {
+        Octopus.ControlType = "Package"
+    }
+    label = "PackageName"
+}
+
 step "run-standard-script" {
     name = "Run Standard Script"
     properties = {
@@ -21,7 +28,7 @@ step "run-standard-script" {
 }
 
 step "deploy-to-iis" {
-    name = "Deploy to IIS"
+    name = "Legacy Deployment"
     properties = {
         Octopus.Action.TargetRoles = "web"
     }
@@ -52,6 +59,8 @@ step "deploy-to-iis" {
 
         packages {
             acquisition_location = "Server"
+            feed = "octopus-server-built-in"
+            package_id = ""
             properties = {
                 SelectionMode = "deferred"
             }
