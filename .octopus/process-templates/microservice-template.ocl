@@ -1,2 +1,21 @@
 name = "Microservice Template"
 description = ""
+
+step "deploy-help-chart" {
+    name = "Deploy Help Chart"
+    properties = {
+        Octopus.Action.TargetRoles = "kubernetes"
+    }
+
+    action {
+        action_type = "Octopus.HelmChartUpgrade"
+        properties = {
+            Octopus.Action.GitRepository.Source = "Project"
+            Octopus.Action.Helm.ChartDirectory = "./chart/"
+            Octopus.Action.Helm.Namespace = "#{HelloWorld}"
+            Octopus.Action.Helm.ResetValues = "True"
+            Octopus.Action.Kubernetes.ResourceStatusCheck = "True"
+            Octopus.Action.Script.ScriptSource = "GitRepository"
+        }
+    }
+}
