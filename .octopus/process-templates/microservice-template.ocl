@@ -9,6 +9,46 @@ parameter "Infrastructure.Target.Tag" {
     label = "Kubernetes Target Tag"
 }
 
+parameter "Infrastructure.WorkerPool" {
+    display_settings = {
+        Octopus.ControlType = "WorkerPool"
+    }
+    help_text = ""
+    label = "Worker Pool"
+}
+
+parameter "Project.Database.Name" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Database Name"
+}
+
+parameter "Project.Database.Server" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Data Server"
+}
+
+parameter "Project.Database.UserName" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Database User Name"
+}
+
+parameter "Project.Database.UserPass" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Database User Password"
+}
+
 parameter "Project.Kubernetes.Manifest.Repo" {
     display_settings = {
         Octopus.ControlType = "SingleLineText"
@@ -31,14 +71,6 @@ parameter "Project.Kubernetes.Namespace" {
     }
     help_text = ""
     label = "Kubernetes Namespace"
-}
-
-parameter "Infrastructure.WorkerPool" {
-    display_settings = {
-        Octopus.ControlType = "WorkerPool"
-    }
-    help_text = ""
-    label = "Worker Pool"
 }
 
 step "run-database-migration" {
