@@ -1,6 +1,11 @@
 name = "Microservice Template"
 description = ""
 
+icon {
+    color = "#3CA4F3"
+    id = "cog"
+}
+
 parameter "Infrastructure.Target.Tag" {
     display_settings = {
         Octopus.ControlType = "TargetTags"
