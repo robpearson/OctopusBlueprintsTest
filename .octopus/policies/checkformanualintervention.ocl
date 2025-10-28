@@ -8,7 +8,7 @@ scope {
         default evaluate := false
         evaluate := true if {
             input.Environment.Name == "Production"
-            input.Project.Name == "Portal Front End"
+            input.Project.Name == "Payments Microservice"
             input.Space.Name == "FinTech"
         }
     EOT
