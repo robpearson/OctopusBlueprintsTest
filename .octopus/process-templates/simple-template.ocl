@@ -24,7 +24,7 @@ step "hello-world" {
         action_type = "Octopus.Script"
         properties = {
             Octopus.Action.RunOnServer = "true"
-            Octopus.Action.Script.ScriptBody = "Write-Host \"Hello $name\""
+            Octopus.Action.Script.ScriptBody = "Write-Host \"Welcome $name to Platform Hub!\""
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "PowerShell"
             OctopusUseBundledTooling = "False"
