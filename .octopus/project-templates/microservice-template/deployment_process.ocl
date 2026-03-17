@@ -10,5 +10,6 @@ step "hello-world" {
             Octopus.Action.Script.Syntax = "PowerShell"
             OctopusUseBundledTooling = "False"
         }
+        worker_pool_variable = "#{Template.WorkerPool}"
     }
 }
