@@ -5,3 +5,11 @@ parameter "Template.WorkerPool" {
     help_text = ""
     label = ""
 }
+
+parameter "Template.Slack.Url" {
+    display_settings = {
+        Octopus.ControlType = "Sensitive"
+    }
+    help_text = ""
+    label = ""
+}
