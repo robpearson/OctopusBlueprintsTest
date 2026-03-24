@@ -5,3 +5,13 @@ parameter "Template.WorkerPool" {
     help_text = ""
     label = ""
 }
+
+parameter "Template.Name" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = ""
+
+    value "World" {}
+}
