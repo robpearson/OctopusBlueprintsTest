@@ -2,6 +2,6 @@ name = "Microservice Template"
 description = ""
 
 icon {
-    color = "#757575"
+    color = "#00874D"
     id = "swatchbook"
 }
