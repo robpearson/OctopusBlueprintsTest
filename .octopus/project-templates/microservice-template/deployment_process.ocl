@@ -11,19 +11,17 @@ step "production-approval" {
     }
 }
 
-step "hello-world" {
-    name = "Hello world!"
+process_template "run-a-process-template" {
+    name = "Run a Process Template"
+    process_template_slug = "simple-template"
+    version_mask = "1.X"
 
-    action {
-        action_type = "Octopus.Script"
-        properties = {
-            Octopus.Action.RunOnServer = "true"
-            Octopus.Action.Script.ScriptBody = "Write-Host \"Hello #{Template.Name}!\""
-            Octopus.Action.Script.ScriptSource = "Inline"
-            Octopus.Action.Script.Syntax = "PowerShell"
-            OctopusUseBundledTooling = "False"
-        }
-        worker_pool_variable = "#{Template.WorkerPool}"
+    parameter "name" {
+        value = "aadsf"
+    }
+
+    parameter "worker-pool" {
+        value = "#{Template.WorkerPool}"
     }
 }
 
