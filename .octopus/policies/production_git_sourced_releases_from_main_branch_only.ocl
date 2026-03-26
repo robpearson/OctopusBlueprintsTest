@@ -11,7 +11,7 @@ conditions {
             # Allow: If the release is associated with a specific Git reference
             result := {"allowed": true} if {
             	# Target a specific branch, tag, or commit hash for the release
-            	input.Release.GitRef == "<Release-GitRef>"
+            	input.Release.GitRef == "main"
             }
             EOT
 }
@@ -22,14 +22,11 @@ scope {
             
             default evaluate := true
             
-            # The following are examples of available scoping options:
-            # evaluate if {    
+            evaluate if {    
             	# Scope evaluation by Environment name    
-            	# input.Environment.Name == "<environment-name>"    
+            	 input.Environment.Name == "Production"    
             	# Scope evaluation to Space Id    
-            	# input.Space.Id == "<space-id>"
-            	# Scope evaluation to multiple Spaces
-                # input.Project.Slug in ["<project-slug>", "<project-slug2>"]
-            # }
+            	input.Space.Id == "FinTech"
+            }
             EOT
 }
