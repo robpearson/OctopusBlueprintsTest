@@ -1,4 +1,4 @@
-name = "Production Deployments from main branch ONLY"
+name = "Production - Git Sourced Resources from main branch ONLY"
 violation_action = "block"
 
 conditions {
