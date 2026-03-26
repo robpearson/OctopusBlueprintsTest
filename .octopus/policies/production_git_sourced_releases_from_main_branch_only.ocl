@@ -1,0 +1,35 @@
+name = "Production - Git Sourced Releases from main branch ONLY"
+violation_action = "block"
+
+conditions {
+    rego = <<-EOT
+            package production_git_sourced_releases_from_main_branch_only
+            
+            # Default: Deny all deployments
+            default result := {"allowed": false}
+            
+            # Allow: If the release is associated with a specific Git reference
+            result := {"allowed": true} if {
+            	# Target a specific branch, tag, or commit hash for the release
+            	input.Release.GitRef == "<Release-GitRef>"
+            }
+            EOT
+}
+
+scope {
+    rego = <<-EOT
+            package production_git_sourced_releases_from_main_branch_only
+            
+            default evaluate := true
+            
+            # The following are examples of available scoping options:
+            # evaluate if {    
+            	# Scope evaluation by Environment name    
+            	# input.Environment.Name == "<environment-name>"    
+            	# Scope evaluation to Space Id    
+            	# input.Space.Id == "<space-id>"
+            	# Scope evaluation to multiple Spaces
+                # input.Project.Slug in ["<project-slug>", "<project-slug2>"]
+            # }
+            EOT
+}
