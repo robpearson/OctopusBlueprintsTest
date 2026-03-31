@@ -1,2 +1,6 @@
 name = "Legacy PHP service deployment"
-description = "# Standard PHP Deployment Process"
+description = <<-EOT
+        ## Standard PHP Deployment Process
+        
+        Legacy PHP Deployment including database changes to postgres
+        EOT
