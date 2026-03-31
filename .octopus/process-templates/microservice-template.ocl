@@ -1,5 +1,9 @@
 name = "Microservice Template"
-description = ""
+description = <<-EOT
+        ## Standard Microservice template
+        
+        This process template captures the standard microservice deployment including database changes and service deployment to Kubernetes. 
+        EOT
 
 icon {
     color = "#3CA4F3"
