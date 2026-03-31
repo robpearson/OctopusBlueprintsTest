@@ -1,5 +1,5 @@
 name = "Microservice Template"
-description = ""
+description = "This process template captures the standard microservice deployment including database changes and service deployment to Kubernetes. "
 
 icon {
     color = "#00874D"
