@@ -1,2 +1,6 @@
 name = "Canary - 3 Phase"
-description = "3 phase Canary Template"
+description = <<-EOT
+        ## Canary Pattern template
+        
+        Canary pattern - three phases - 10%, 50%, 100%
+        EOT
