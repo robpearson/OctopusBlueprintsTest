@@ -1,0 +1,6 @@
+name = "Canary - 2 phase"
+description = <<-EOT
+        ## Canary Pattern template  
+        
+        Canary pattern - two phases - 30%, 100%
+        EOT
