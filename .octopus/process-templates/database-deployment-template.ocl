@@ -1,2 +1,6 @@
 name = "Database deployment template"
-description = ""
+description = <<-EOT
+        ## Standard Database deployment with approval
+        
+        Standard database deployment with an approval to review the database delta
+        EOT
