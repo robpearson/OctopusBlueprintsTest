@@ -1,0 +1,6 @@
+name = "Deploy webapp to Azure App Service"
+description = <<-EOT
+        ## Standard Azure App Service template
+        
+        Deploys a .NET Web application to an Azure App Service including Productional Approval, Database Scripts and Slack notification.
+        EOT
