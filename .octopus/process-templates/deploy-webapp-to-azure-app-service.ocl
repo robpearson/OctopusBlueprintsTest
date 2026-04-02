@@ -4,3 +4,25 @@ description = <<-EOT
         
         Deploys a .NET Web application to an Azure App Service including Productional Approval, Database Scripts and Slack notification.
         EOT
+
+parameter "Production Environment" {
+    display_settings = {
+        Octopus.ControlType = "Environments"
+    }
+    help_text = ""
+    label = ""
+}
+
+step "production-approval" {
+    name = "Production Approval"
+
+    action {
+        action_type = "Octopus.Manual"
+        environments_variable = "#{Production Environment}"
+        properties = {
+            Octopus.Action.Manual.BlockConcurrentDeployments = "False"
+            Octopus.Action.Manual.Instructions = "Has this change request been approved? "
+            Octopus.Action.Manual.ResponsibleTeamIds = "global/everyone"
+        }
+    }
+}
