@@ -13,6 +13,22 @@ parameter "Production Environment" {
     label = ""
 }
 
+parameter "Worker Pool" {
+    display_settings = {
+        Octopus.ControlType = "WorkerPool"
+    }
+    help_text = ""
+    label = ""
+}
+
+parameter "azure-account" {
+    display_settings = {
+        Octopus.ControlType = "AzureAccount"
+    }
+    help_text = ""
+    label = ""
+}
+
 step "production-approval" {
     name = "Production Approval"
 
@@ -24,5 +40,25 @@ step "production-approval" {
             Octopus.Action.Manual.Instructions = "Has this change request been approved? "
             Octopus.Action.Manual.ResponsibleTeamIds = "global/everyone"
         }
+    }
+}
+
+step "deploy-database-changes" {
+    name = "Deploy database changes"
+
+    action {
+        action_type = "Octopus.AzurePowerShell"
+        properties = {
+            Octopus.Action.Azure.AccountId = "#{azure-account}"
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                Write-Host 'Deploying database changes ...'
+                
+                # TODO: Wire up DACPAC, DbUp, Entity Framework etc.
+                EOT
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "PowerShell"
+            OctopusUseBundledTooling = "False"
+        }
+        worker_pool_variable = "#{Worker Pool}"
     }
 }
