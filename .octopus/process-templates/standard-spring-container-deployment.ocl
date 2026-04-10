@@ -1,5 +1,9 @@
 name = "Spring Webapp to Tomcat"
-description = ""
+description = <<-EOT
+        ## Spring Webapp to Tomcat
+        
+        Deploy a Spring Web App to Tomcat running in a Linux virtual machine
+        EOT
 
 icon {
     color = "#927002"
