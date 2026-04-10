@@ -6,6 +6,6 @@ description = <<-EOT
         EOT
 
 icon {
-    color = "#00874D"
+    color = "#895ED3"
     id = "database"
 }
