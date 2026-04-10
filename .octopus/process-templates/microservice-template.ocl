@@ -1,4 +1,4 @@
-name = "Microservice Template"
+name = "Microservice to Kubernetes Cluster"
 description = <<-EOT
         ## Standard Microservice template
         
@@ -6,8 +6,8 @@ description = <<-EOT
         EOT
 
 icon {
-    color = "#3CA4F3"
-    id = "cog"
+    color = "#1A77CA"
+    id = "dharmachakra"
 }
 
 parameter "Infrastructure.Target.Tag" {
