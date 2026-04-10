@@ -1,6 +1,11 @@
-name = "Legacy PHP service deployment"
+name = "Legacy PHP website to AWS EC2 Linux VM"
 description = <<-EOT
         ## Standard PHP Deployment Process
         
         Legacy PHP Deployment including database changes to postgres
         EOT
+
+icon {
+    color = "#927002"
+    id = ""
+}
