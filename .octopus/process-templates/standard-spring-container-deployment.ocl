@@ -1,2 +1,7 @@
-name = "Standard Spring container deployment"
+name = "Spring Webapp to Tomcat"
 description = ""
+
+icon {
+    color = "#927002"
+    id = "server"
+}
