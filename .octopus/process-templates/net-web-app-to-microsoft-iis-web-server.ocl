@@ -1,2 +1,7 @@
 name = ".NET Web App to Microsoft IIS Web Server"
 description = ""
+
+icon {
+    color = "#1A77CA"
+    id = "server"
+}
