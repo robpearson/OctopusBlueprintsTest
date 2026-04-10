@@ -5,6 +5,11 @@ description = <<-EOT
         Deploys a .NET Web application to an Azure App Service including Productional Approval, Database Scripts and Slack notification.
         EOT
 
+icon {
+    color = "#1A77CA"
+    id = "cloud"
+}
+
 parameter "Production Environment" {
     display_settings = {
         Octopus.ControlType = "Environments"
