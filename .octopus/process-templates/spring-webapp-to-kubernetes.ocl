@@ -1,0 +1,6 @@
+name = "Spring Webapp to Kubernetes"
+description = <<-EOT
+        ## Spring Webapp to Kubernetes
+        
+        Deploy a containerised web app to Kubernetes
+        EOT
