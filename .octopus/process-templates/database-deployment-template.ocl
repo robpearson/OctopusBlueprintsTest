@@ -4,3 +4,8 @@ description = <<-EOT
         
         Standard database deployment with an approval to review the database delta
         EOT
+
+icon {
+    color = "#1A77CA"
+    id = "database"
+}
