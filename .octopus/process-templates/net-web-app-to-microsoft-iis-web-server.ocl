@@ -1,5 +1,9 @@
 name = ".NET Web App to Microsoft IIS Web Server"
-description = ""
+description = <<-EOT
+        ## .NET Web App / Web Service to IIS
+        
+        Deploys a .NET Web application to IIS running on a Windows Server.
+        EOT
 
 icon {
     color = "#1A77CA"
