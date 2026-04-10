@@ -1,5 +1,14 @@
 name = "Simple Template"
-description = ""
+description = <<-EOT
+        ## Simple Hello World Template
+        
+        Hello world template used for demo purposes.
+        EOT
+
+icon {
+    color = "#00874D"
+    id = "grin-alt"
+}
 
 parameter "name" {
     display_settings = {
