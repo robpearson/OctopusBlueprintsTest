@@ -1,4 +1,4 @@
-name = "Legacy PHP website to AWS EC2 Linux VM"
+name = "PHP website to AWS EC2 Linux VM"
 description = <<-EOT
         ## Standard PHP Deployment Process
         
@@ -7,5 +7,5 @@ description = <<-EOT
 
 icon {
     color = "#927002"
-    id = ""
+    id = "server"
 }
