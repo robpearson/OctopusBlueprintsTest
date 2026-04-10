@@ -1,4 +1,4 @@
-name = "Deploy webapp to Azure App Service"
+name = ".NET Webapp to Azure App Service"
 description = <<-EOT
         ## Standard Azure App Service template
         
