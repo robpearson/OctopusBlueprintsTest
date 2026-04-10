@@ -1,4 +1,4 @@
-name = "Canary - 3 Phase"
+name = "Microservice - Canary Pattern - 3 phase"
 description = <<-EOT
         ## Canary Pattern template
         
