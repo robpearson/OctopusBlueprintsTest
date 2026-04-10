@@ -4,3 +4,8 @@ description = <<-EOT
         
         Canary pattern - two phases - 30%, 100%
         EOT
+
+icon {
+    color = "#1A77CA"
+    id = "crow"
+}
