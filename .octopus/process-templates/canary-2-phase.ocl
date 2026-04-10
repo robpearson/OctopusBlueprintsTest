@@ -1,4 +1,4 @@
-name = "Canary - 2 phase"
+name = "Canary Pattern - 2 phase"
 description = <<-EOT
         ## Canary Pattern template  
         
