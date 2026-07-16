@@ -22,6 +22,15 @@ parameter "Template.ContainerRegistry" {
     label = "Container Registry"
 }
 
+parameter "Template.HelmImageTagPath" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    is_optional = true
+    label = "Helm Image Tag Path"
+}
+
 step "update-database" {
     name = "Update Database"
 
@@ -58,9 +67,11 @@ step "update-argo-cd-application-image-tags" {
 
         packages "Template.ContainerRegistry" {
             acquisition_location = "NotAcquired"
+            feed = "octopus-server-built-in"
             package_id = ""
             properties = {
                 Extract = "false"
+                HelmReplacementPath = "#{Template.HelmImageTagPath}"
                 PackageParameterName = "Template.ContainerRegistry"
                 Purpose = "DockerImageReference"
                 SelectionMode = "deferred"
