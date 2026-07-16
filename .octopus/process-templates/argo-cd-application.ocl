@@ -14,6 +14,14 @@ parameter "Template.WorkerPool" {
     label = "Worker Pool"
 }
 
+parameter "Template.ContainerRegistry" {
+    display_settings = {
+        Octopus.ControlType = "Package"
+    }
+    help_text = ""
+    label = "Container Registry"
+}
+
 step "update-database" {
     name = "Update Database"
 
@@ -30,5 +38,33 @@ step "update-database" {
             Octopus.Action.Script.Syntax = "PowerShell"
         }
         worker_pool_variable = "#{Template.WorkerPool}"
+    }
+}
+
+step "update-argo-cd-application-image-tags" {
+    name = "Update Argo CD Application Image Tags"
+
+    action {
+        action_type = "Octopus.ArgoCDUpdateImageTags"
+        properties = {
+            Octopus.Action.ArgoCD.CommitMessageSummary = "Octopus Deploy updated image versions"
+            Octopus.Action.ArgoCD.CommitMethod = "DirectCommit"
+            Octopus.Action.ArgoCD.PushRetryAttempts = "2"
+            Octopus.Action.ArgoCD.StepVerification.Method = "ArgoCDApplicationHealthy"
+            Octopus.Action.ArgoCD.StepVerification.Timeout = "180"
+            Octopus.Action.ArgoCD.Sync.Mode = "AllEnvironments"
+        }
+        worker_pool_variable = "#{Template.WorkerPool}"
+
+        packages "Template.ContainerRegistry" {
+            acquisition_location = "NotAcquired"
+            package_id = ""
+            properties = {
+                Extract = "false"
+                PackageParameterName = "Template.ContainerRegistry"
+                Purpose = "DockerImageReference"
+                SelectionMode = "deferred"
+            }
+        }
     }
 }
