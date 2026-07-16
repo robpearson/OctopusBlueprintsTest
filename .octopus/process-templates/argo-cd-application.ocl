@@ -1,2 +1,34 @@
 name = "Argo CD Application"
 description = "## Standard Argo CD Container Deployment"
+
+icon {
+    color = "#C45317"
+    id = "octopus-deploy"
+}
+
+parameter "Template.WorkerPool" {
+    display_settings = {
+        Octopus.ControlType = "WorkerPool"
+    }
+    help_text = ""
+    label = "Worker Pool"
+}
+
+step "update-database" {
+    name = "Update Database"
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.RunOnServer = "true"
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                Write-Host "Updating database ..."
+                
+                # todo: run sql client or migrations framework
+                EOT
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "PowerShell"
+        }
+        worker_pool_variable = "#{Template.WorkerPool}"
+    }
+}
