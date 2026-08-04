@@ -2,6 +2,6 @@ name = "Pronto ERP"
 description = ""
 
 icon {
-    color = "#757575"
-    id = "layer-group"
+    color = "#557999"
+    id = "chart-bar"
 }
