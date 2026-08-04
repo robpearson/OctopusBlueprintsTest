@@ -1,4 +1,4 @@
-name = "Tear down test infrastructure"
+name = "Platform - Tear down test infrastructure"
 description = ""
 
 parameter "Template.WorkerPool" {
