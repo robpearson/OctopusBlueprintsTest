@@ -1,2 +1,50 @@
 name = "Platform - Copy Live to Test"
 description = ""
+
+parameter "Template.WorkerPool" {
+    display_settings = {
+        Octopus.ControlType = "WorkerPool"
+    }
+    help_text = ""
+    label = "Worker Pool"
+}
+
+parameter "Template.ProductionConnectionString" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Product Database Connection String"
+}
+
+parameter "Template.TestDatabaseConnectionString" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Test Database Connection String"
+}
+
+step "copy-live-database-to-test-environment" {
+    name = "Copy Live Database to Test Environment"
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.RunOnServer = "true"
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                # Copy Live to Test 
+                
+                # 1. Delete Test Database
+                
+                # 2. Copy Production Database to Test Environment
+                
+                # 3. Sanitise Test Database
+                
+                EOT
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "PowerShell"
+        }
+        worker_pool_variable = "#{Template.WorkerPool}"
+    }
+}
