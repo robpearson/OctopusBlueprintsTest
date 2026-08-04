@@ -1,4 +1,4 @@
-name = "Provision Test Infrastructure"
+name = "Platform - Provision Test Infrastructure"
 description = ""
 
 parameter "Template.WorkerPool" {
