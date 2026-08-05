@@ -1,7 +1,7 @@
 ﻿{
-  "issuer": "https://github.com/robpearson/OctopusBlueprintsTest/upload/main/.octopus",
-  "token_endpoint": "https://github.com/robpearson/OctopusBlueprintsTest/upload/main/.octopus/token/v1",
-  "jwks_uri": "https://github.com/robpearson/OctopusBlueprintsTest/upload/main/.octopus/.well-known/jwks",
+  "issuer": "https://github.com/robpearson/OctopusBlueprintsTest/blob/main",
+  "token_endpoint": "https://github.com/robpearson/OctopusBlueprintsTest/blob/main/token/v1",
+  "jwks_uri": "https://github.com/robpearson/OctopusBlueprintsTest/blob/main/.well-known/jwks",
   "subject_types_supported": [
     "public",
     "pairwise"
