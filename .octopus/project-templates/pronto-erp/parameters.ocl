@@ -13,3 +13,11 @@ parameter "Octopus.Admin.ApiKey" {
     help_text = ""
     label = "Admin API Key"
 }
+
+parameter "Template.ApprovalTeam" {
+    display_settings = {
+        Octopus.ControlType = "Teams"
+    }
+    help_text = ""
+    label = "Approval Team"
+}
