@@ -5,3 +5,11 @@ parameter "Template.WorkerPool" {
     help_text = ""
     label = "Worker Pool"
 }
+
+parameter "Octopus.Admin.ApiKey" {
+    display_settings = {
+        Octopus.ControlType = "Sensitive"
+    }
+    help_text = ""
+    label = "Admin API Key"
+}
