@@ -1,5 +1,9 @@
 name = "Platform - Provision Test Infrastructure"
-description = ""
+description = <<-EOT
+        ## Provision Test Infrastructure
+        
+        Create a new namespace for testing purposes
+        EOT
 
 parameter "Template.WorkerPool" {
     display_settings = {
