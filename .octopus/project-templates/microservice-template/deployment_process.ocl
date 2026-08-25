@@ -1400,7 +1400,7 @@ step "run-pre-deploy-runbook" {
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "PowerShell"
-            Run.Runbook.Api.Key = "#{Template.Octopus.ApiKey}"
+            Run.Runbook.Api.Key = "#{Project.Octopus.ApiKey}"
             Run.Runbook.AutoApproveManualInterventions = "No"
             Run.Runbook.Base.Url = "#{Octopus.Web.ServerUri}"
             Run.Runbook.CancelInSeconds = "1800"
@@ -3247,7 +3247,7 @@ step "run-post-deploy-runbook" {
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "PowerShell"
-            Run.Runbook.Api.Key = "#{Template.Octopus.ApiKey}"
+            Run.Runbook.Api.Key = "#{Project.Octopus.ApiKey}"
             Run.Runbook.AutoApproveManualInterventions = "No"
             Run.Runbook.Base.Url = "#{Octopus.Web.ServerUri}"
             Run.Runbook.CancelInSeconds = "1800"
