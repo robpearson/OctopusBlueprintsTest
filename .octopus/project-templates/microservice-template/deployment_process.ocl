@@ -1412,7 +1412,7 @@ step "run-pre-deploy-runbook" {
             Run.Runbook.Name = "#{Template.PreDeploy.RunbookName}"
             Run.Runbook.Project.Name = "#{Octopus.Project.Name}"
             Run.Runbook.Space.Name = "#{Octopus.Space.Name}"
-            Run.Runbook.UsePublishedSnapShot = "True"
+            Run.Runbook.UsePublishedSnapShot = "False"
             Run.Runbook.Waitforfinish = "True"
         }
         worker_pool_variable = "#{Template.WorkerPool}"
