@@ -1,5 +1,5 @@
 step "production-approval" {
-    name = "Production Approval"
+    name = "Approval"
 
     action {
         action_type = "Octopus.Manual"
