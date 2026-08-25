@@ -23,3 +23,19 @@ parameter "Template.Octopus.ApiKey" {
     help_text = ""
     label = "Octopus API Key"
 }
+
+parameter "Template.PreDeploy.RunbookName" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Pre-Deploy runbook name"
+}
+
+parameter "Template.PostDeploy.RunbookName" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Post-deploy Runbook Name"
+}
