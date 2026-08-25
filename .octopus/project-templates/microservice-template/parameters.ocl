@@ -31,3 +31,67 @@ parameter "Template.PostDeploy.RunbookName" {
     help_text = ""
     label = "Post-deploy Runbook Name"
 }
+
+parameter "Template.Kubernetes.TargetTags" {
+    display_settings = {
+        Octopus.ControlType = "TargetTags"
+    }
+    help_text = ""
+    label = "Kubernetes Target Tags"
+}
+
+parameter "Template.Database.Name" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Database Name"
+}
+
+parameter "Template.Database.Server" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Database Server"
+}
+
+parameter "Template.Database.UserName" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Database User Name"
+}
+
+parameter "Template.Database.UserPassword" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Database User Password"
+}
+
+parameter "Template.Kubernetes.Manifest.RepoUrl" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Kubernetes Manifest Git Repo URL"
+}
+
+parameter "Template.Kubernetes.Manifest.FilePath" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Kubernetes Manifest File Path"
+}
+
+parameter "Template.Kubernetes.Namespace" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Kubernetes Namespace"
+}
