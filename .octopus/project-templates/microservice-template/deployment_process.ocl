@@ -1710,6 +1710,48 @@ step "run-pre-deploy-runbook" {
     }
 }
 
+process_template "run-a-process-template" {
+    name = "Run a Process Template"
+    process_template_slug = "microservice-template"
+    version_mask = "1.X"
+
+    parameter "Infrastructure.Target.Tag" {
+        value = "#{Template.Kubernetes.TargetTags}"
+    }
+
+    parameter "Infrastructure.WorkerPool" {
+        value = "#{Template.WorkerPool}"
+    }
+
+    parameter "Project.Database.Name" {
+        value = "#{Template.Database.Name}"
+    }
+
+    parameter "Project.Database.Server" {
+        value = "#{Template.Database.Server}"
+    }
+
+    parameter "Project.Database.UserName" {
+        value = "#{Template.Database.UserName}"
+    }
+
+    parameter "Project.Database.UserPass" {
+        value = "#{Template.Database.UserPassword}"
+    }
+
+    parameter "Project.Kubernetes.Manifest.Repo" {
+        value = "#{Template.Kubernetes.Manifest.RepoUrl}"
+    }
+
+    parameter "Project.Kubernetes.Manifest.FilePath" {
+        value = "#{Template.Kubernetes.Manifest.FilePath}"
+    }
+
+    parameter "Project.Kubernetes.Namespace" {
+        value = "#{Template.Kubernetes.Namespace}"
+    }
+}
+
 step "run-post-deploy-runbook" {
     name = "Run post-deploy runbook"
 
@@ -3540,47 +3582,5 @@ step "notify-team" {
                 default_value = "good"
             }
         }
-    }
-}
-
-process_template "run-a-process-template" {
-    name = "Run a Process Template"
-    process_template_slug = "microservice-template"
-    version_mask = "1.X"
-
-    parameter "Infrastructure.Target.Tag" {
-        value = "#{Template.Kubernetes.TargetTags}"
-    }
-
-    parameter "Infrastructure.WorkerPool" {
-        value = "#{Template.WorkerPool}"
-    }
-
-    parameter "Project.Database.Name" {
-        value = "#{Template.Database.Name}"
-    }
-
-    parameter "Project.Database.Server" {
-        value = "#{Template.Database.Server}"
-    }
-
-    parameter "Project.Database.UserName" {
-        value = "#{Template.Database.UserName}"
-    }
-
-    parameter "Project.Database.UserPass" {
-        value = "#{Template.Database.UserPassword}"
-    }
-
-    parameter "Project.Kubernetes.Manifest.Repo" {
-        value = "#{Template.Kubernetes.Manifest.RepoUrl}"
-    }
-
-    parameter "Project.Kubernetes.Manifest.FilePath" {
-        value = "#{Template.Kubernetes.Manifest.FilePath}"
-    }
-
-    parameter "Project.Kubernetes.Namespace" {
-        value = "#{Template.Kubernetes.Namespace}"
     }
 }
