@@ -15,3 +15,11 @@ parameter "Template.Name" {
 
     value "World" {}
 }
+
+parameter "Template.Octopus.ApiKey" {
+    display_settings = {
+        Octopus.ControlType = "Sensitive"
+    }
+    help_text = ""
+    label = "Octopus API Key"
+}
