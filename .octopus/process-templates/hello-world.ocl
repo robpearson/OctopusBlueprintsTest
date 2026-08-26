@@ -16,7 +16,13 @@ step "hello-world" {
         action_type = "Octopus.Script"
         properties = {
             Octopus.Action.RunOnServer = "true"
-            Octopus.Action.Script.ScriptBody = "Write-Host \"Hello world!\""
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                # Some change
+                
+                Write-Host "Hello world!"
+                
+                
+                EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "PowerShell"
         }
