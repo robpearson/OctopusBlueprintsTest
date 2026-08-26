@@ -17,7 +17,7 @@ step "hello-world" {
         properties = {
             Octopus.Action.RunOnServer = "true"
             Octopus.Action.Script.ScriptBody = <<-EOT
-                # Some change
+                # Some change asdf
                 
                 Write-Host "Hello world!"
                 
