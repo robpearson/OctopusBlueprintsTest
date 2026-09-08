@@ -4,3 +4,144 @@ description = <<-EOT
         
         This process template captures the standard microservice deployment including database changes and service deployment to Amazon ECS. 
         EOT
+
+icon {
+    color = "#1A77CA"
+    id = "dharmachakra"
+}
+
+parameter "Infrastructure.Target.Tag" {
+    display_settings = {
+        Octopus.ControlType = "TargetTags"
+    }
+    help_text = ""
+    label = "Kubernetes Target Tag"
+}
+
+parameter "Infrastructure.WorkerPool" {
+    display_settings = {
+        Octopus.ControlType = "WorkerPool"
+    }
+    help_text = ""
+    label = "Worker Pool"
+}
+
+parameter "Project.Database.Name" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Database Name"
+}
+
+parameter "Project.Database.Server" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Data Server"
+}
+
+parameter "Project.Database.UserName" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Database User Name"
+}
+
+parameter "Project.Database.UserPass" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Database User Password"
+}
+
+parameter "Project.Kubernetes.Manifest.Repo" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Kubernetes Manifest Repo URL"
+}
+
+parameter "Project.Kubernetes.Manifest.FilePath" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Kubernetes Manifest filepath"
+}
+
+parameter "Project.Kubernetes.Namespace" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Kubernetes Namespace"
+}
+
+step "run-database-migration" {
+    name = "Run database migration"
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.RunOnServer = "true"
+            Octopus.Action.Script.ScriptBody = "echo 'Deploying database changes ...'"
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "Bash"
+            OctopusUseBundledTooling = "False"
+        }
+        worker_pool_variable = "#{Infrastructure.WorkerPool}"
+    }
+}
+
+step "deploy-kubernetes-yaml" {
+    name = "Deploy Kubernetes YAML"
+    properties = {
+        Octopus.Action.TargetRoles = "#{Infrastructure.Target.Tag}"
+    }
+
+    action {
+        action_type = "Octopus.KubernetesDeployRawYaml"
+        properties = {
+            Octopus.Action.GitRepository.Source = "External"
+            Octopus.Action.Kubernetes.DeploymentTimeout = "180"
+            Octopus.Action.Kubernetes.ResourceStatusCheck = "True"
+            Octopus.Action.Kubernetes.ServerSideApply.Enabled = "True"
+            Octopus.Action.Kubernetes.ServerSideApply.ForceConflicts = "True"
+            Octopus.Action.KubernetesContainers.CustomResourceYamlFileName = "#{Project.Kubernetes.Manifest.FilePath}"
+            Octopus.Action.KubernetesContainers.Namespace = "#{Project.Kubernetes.Namespace}"
+            Octopus.Action.Package.JsonConfigurationVariablesTargets = "**/*.{yml,yaml}"
+            Octopus.Action.RunOnServer = "true"
+            Octopus.Action.Script.ScriptSource = "GitRepository"
+        }
+        worker_pool_variable = "#{Infrastructure.WorkerPool}"
+
+        git_dependencies {
+            default_branch = "main"
+            file_path_filters = ["#{Project.Kubernetes.Manifest.FilePath}"]
+            git_credential_id = "GitCredentialIds-1"
+            git_credential_type = "Library"
+            repository_uri = "#{Project.Kubernetes.Manifest.Repo}"
+        }
+    }
+}
+
+step "run-selenium-test-suite" {
+    name = "Run Selenium Test Suite"
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.RunOnServer = "true"
+            Octopus.Action.Script.ScriptBody = "Write-Host 'Hello world'"
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "PowerShell"
+            OctopusUseBundledTooling = "False"
+        }
+        worker_pool_variable = "#{Infrastructure.WorkerPool}"
+    }
+}
