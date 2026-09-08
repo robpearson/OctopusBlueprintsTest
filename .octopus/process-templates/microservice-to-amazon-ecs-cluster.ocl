@@ -1,0 +1,6 @@
+name = "Microservice to Amazon ECS Cluster"
+description = <<-EOT
+        ## Standard Microservice template
+        
+        This process template captures the standard microservice deployment including database changes and service deployment to Amazon ECS. 
+        EOT
