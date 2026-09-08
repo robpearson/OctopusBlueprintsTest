@@ -7,7 +7,7 @@ description = <<-EOT
 
 icon {
     color = "#1A77CA"
-    id = "dharmachakra"
+    id = "aws"
 }
 
 parameter "Infrastructure.Target.Tag" {
