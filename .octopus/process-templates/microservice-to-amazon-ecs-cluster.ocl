@@ -15,7 +15,7 @@ parameter "Infrastructure.Target.Tag" {
         Octopus.ControlType = "TargetTags"
     }
     help_text = ""
-    label = "Kubernetes Target Tag"
+    label = "ECS Cluster Target Tag"
 }
 
 parameter "Infrastructure.WorkerPool" {
@@ -58,28 +58,68 @@ parameter "Project.Database.UserPass" {
     label = "Database User Password"
 }
 
-parameter "Project.Kubernetes.Manifest.Repo" {
+parameter "Template.ECS.Task.Cpu" {
     display_settings = {
         Octopus.ControlType = "SingleLineText"
     }
     help_text = ""
-    label = "Kubernetes Manifest Repo URL"
+    label = "ECS Task CPU"
 }
 
-parameter "Project.Kubernetes.Manifest.FilePath" {
+parameter "Template.ECS.Task.Memory" {
     display_settings = {
         Octopus.ControlType = "SingleLineText"
     }
     help_text = ""
-    label = "Kubernetes Manifest filepath"
+    label = "ECS Task Memory"
 }
 
-parameter "Project.Kubernetes.Namespace" {
+parameter "Template.ECS.Task.ExecRole.Name" {
     display_settings = {
         Octopus.ControlType = "SingleLineText"
     }
     help_text = ""
-    label = "Kubernetes Namespace"
+    label = "ECS Task Exec Role Name"
+}
+
+parameter "Template.ECS.Task.Name" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "ECS Task Name"
+}
+
+parameter "Template.Container.Id" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Container ID to run in ECS"
+}
+
+parameter "Template.Container.Name" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "Container Name (friendly) to run in ECS"
+}
+
+parameter "Template.AWS.SecurityGroup.Id" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "AWS Security Group Id"
+}
+
+parameter "Template.AWS.Subnet.Id" {
+    display_settings = {
+        Octopus.ControlType = "SingleLineText"
+    }
+    help_text = ""
+    label = "AWS Subnet.Id"
 }
 
 step "run-database-migration" {
@@ -98,35 +138,34 @@ step "run-database-migration" {
     }
 }
 
-step "deploy-kubernetes-yaml" {
-    name = "Deploy Kubernetes YAML"
+step "deploy-microservice" {
+    name = "Deploy Microservice"
     properties = {
         Octopus.Action.TargetRoles = "#{Infrastructure.Target.Tag}"
     }
 
     action {
-        action_type = "Octopus.KubernetesDeployRawYaml"
+        action_type = "Octopus.AwsDeployEcsService"
         properties = {
-            Octopus.Action.GitRepository.Source = "External"
-            Octopus.Action.Kubernetes.DeploymentTimeout = "180"
-            Octopus.Action.Kubernetes.ResourceStatusCheck = "True"
-            Octopus.Action.Kubernetes.ServerSideApply.Enabled = "True"
-            Octopus.Action.Kubernetes.ServerSideApply.ForceConflicts = "True"
-            Octopus.Action.KubernetesContainers.CustomResourceYamlFileName = "#{Project.Kubernetes.Manifest.FilePath}"
-            Octopus.Action.KubernetesContainers.Namespace = "#{Project.Kubernetes.Namespace}"
-            Octopus.Action.Package.JsonConfigurationVariablesTargets = "**/*.{yml,yaml}"
-            Octopus.Action.RunOnServer = "true"
-            Octopus.Action.Script.ScriptSource = "GitRepository"
+            Octopus.Action.Aws.Ecs.Deploy.AutoAssignPublicIp = "True"
+            Octopus.Action.Aws.Ecs.Deploy.Containers = "[]"
+            Octopus.Action.Aws.Ecs.Deploy.Cpu = "#{Template.ECS.Task.Cpu}"
+            Octopus.Action.Aws.Ecs.Deploy.DesiredCount = "1"
+            Octopus.Action.Aws.Ecs.Deploy.EnableEcsManagedTags = "False"
+            Octopus.Action.Aws.Ecs.Deploy.LoadBalancerMappings = "[]"
+            Octopus.Action.Aws.Ecs.Deploy.MaximumHealthPercent = "200"
+            Octopus.Action.Aws.Ecs.Deploy.Memory = "#{Template.ECS.Task.Memory}"
+            Octopus.Action.Aws.Ecs.Deploy.MinimumHealthPercent = "100"
+            Octopus.Action.Aws.Ecs.Deploy.RuntimeArchitecturePlatform = "X86_64"
+            Octopus.Action.Aws.Ecs.Deploy.SecurityGroupIds = "[\"#{Template.AWS.SecurityGroup.Id}\"]"
+            Octopus.Action.Aws.Ecs.Deploy.ServiceTaskName = "#{Template.ECS.Task.Name}"
+            Octopus.Action.Aws.Ecs.Deploy.SubnetIds = "[\"#{Template.AWS.Subnet.Id}\"]"
+            Octopus.Action.Aws.Ecs.Deploy.TaskExecutionRole = "#{Template.ECS.Task.ExecRole.Name}"
+            Octopus.Action.Aws.Ecs.Deploy.Volumes = "[]"
+            Octopus.Action.Aws.Ecs.Tags = "[]"
+            Octopus.Action.Aws.Ecs.WaitOption = "{\"Type\":\"WaitWithTimeout\",\"TimeoutMinutes\":\"30\"}"
         }
         worker_pool_variable = "#{Infrastructure.WorkerPool}"
-
-        git_dependencies {
-            default_branch = "main"
-            file_path_filters = ["#{Project.Kubernetes.Manifest.FilePath}"]
-            git_credential_id = "GitCredentialIds-1"
-            git_credential_type = "Library"
-            repository_uri = "#{Project.Kubernetes.Manifest.Repo}"
-        }
     }
 }
 
